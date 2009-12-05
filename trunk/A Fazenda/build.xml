@@ -1,0 +1,62 @@
+<project name="A Fazenda" default="all" basedir=".">
+
+<!--Definindo variáveis globais para esse build notem que   quando quero refenciar essas varíaveis deve ser utilizado ${var} onde   var é o valor que tem no atributo name.   O atributo value indica o valor a ser atribuído a variável. [Nome de pasta, pasta onde já existe conteúdo, etc.] -->          
+
+	<!-- propriedades do projeto com os nomes dos diretórios -->   
+	  
+	    <property name="src" value="\${basedir}/src" />   
+	    <property name="build" value="classes" />   
+	    <property name="dist" value="dist" />   
+	    <property name="package" value="projeto.*" />   
+	  
+	  
+	<!--   
+	target init -  target responsável por criar os diretórios classes, doc e dist.   
+	-->   
+	  
+	    <target name="init">   
+	    <echo> Criando os diretório classes, doc e dist.</echo>   
+	    <mkdir dir="\${build}" />   
+	    <mkdir dir="\${dist}" />   
+	    </target>   
+	  
+	<!--   
+	target compile - target responsável por compilar o projeto separando os arquivos .class no diretório classes.   
+	-->   
+	  
+	    <target name="compile" depends="init">   
+	    <echo> Compilando o projeto.</echo>       	    
+	    		<javac srcdir="${basedir}\src\projeto\afazenda" destdir="\${build}"/>
+	    		<javac srcdir="${basedir}\src\projeto\bd" destdir="\${build}"/>
+	    		<javac srcdir="${basedir}\src\projeto\gui" destdir="\${build}"/>
+	    		
+	    </target>   
+	  
+	<!--   
+	target dist - target responsável por gerar o .jar executável do projéto no diretório dist.   
+	-->   
+	  
+	    <target name="dist" depends="compile">   
+	    <echo> Gerando o .jar do projeto.</echo>       
+	    <jar jarfile="\${basedir}\src\projeto\AFazenda.jar" basedir="\${build}">   
+	        <!-- Tornando o jar executável-->   
+	        <manifest>   
+	            <attribute name="Main-Class" value="projeto.gui.Main"/>              
+	        </manifest>   
+	    </jar>   
+	    </target>   
+	  
+	<!--   
+	target all - target responsável por iniciar o processo default e executar a aplicação.   
+	-->   
+	  
+	    <target name="all" depends="dist">   
+	    <echo> Executa o projeto.</echo>   
+	    <java jar="\${basedir}\src\projeto\AFazenda.jar" fork="true"/>   
+	    </target>   
+	  
+	    <target name="clear">   
+	        <delete dir="\${build}" />   
+	        <delete dir="\${dist}" />       
+	    </target>   
+	</project>  
