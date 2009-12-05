@@ -12,6 +12,7 @@
 package projeto.gui;
 
 import projeto.bd.VacasDAO;
+import projeto.bd.VaqueirosDAO;
 import projeto.afazenda.Vaca;
 import java.util.List;
 /**
@@ -21,12 +22,15 @@ import java.util.List;
 public class DadosDeVacas extends javax.swing.JFrame {
 
     VacasDAO vacasDAO = new VacasDAO();
+    VaqueirosDAO vaqueirosDAO = new VaqueirosDAO();
     
     int vacaID;
     CrudVacas crudVacas;
     /** Creates new form DadosDeVacas */
     public DadosDeVacas(CrudVacas crudVacas, boolean visivel) {
         this.crudVacas = crudVacas;
+        setBounds(new java.awt.Rectangle(300,  180, 600, 600));
+        setTitle("A Fazenda - Dados Vacas");
         setVisible(visivel);
         initComponents();
     }
@@ -58,7 +62,7 @@ public class DadosDeVacas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12));
         jLabel1.setText("Dados das Vacas");
 
         jLabel2.setText("Vaca:");
@@ -69,7 +73,7 @@ public class DadosDeVacas extends javax.swing.JFrame {
 
         jLabel5.setText("Quantidade de Filhos:");
 
-        jLabel6.setText("Rebanho:");
+        jLabel6.setText("ID do Rebanho:");
 
         jLabel7.setText("Vaqueiro Responsavel:");
 
@@ -172,6 +176,8 @@ public class DadosDeVacas extends javax.swing.JFrame {
         jTextField3.setText("");
         jTextField4.setText("");
         jTextField5.setText("");
+        setVisible(false);
+        crudVacas.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void listaVacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaVacasActionPerformed
@@ -183,10 +189,15 @@ public class DadosDeVacas extends javax.swing.JFrame {
 
         vacaID = getVacaID(indice);
 
+        String vaqueiroCPF = vacasDAO.getVaqueiroCPF(vacaID);
+        String nomeVaqueiro = vaqueirosDAO.getNomeVaqueiro(vaqueiroCPF);
 
         jTextField1.setText(vacasDAO.getNomeVaca(vacaID));
         jTextField2.setText(String.valueOf(vacasDAO.getIdadeVaca(vacaID)));
         jTextField3.setText(String.valueOf(vacasDAO.getQtdeFilho(vacaID)));
+        jTextField4.setText(String.valueOf(crudVacas.rebanhoID));
+        jTextField5.setText(vaqueiroCPF + " - " + nomeVaqueiro);
+
     }//GEN-LAST:event_listaVacasActionPerformed
 
     private int getVacaID(int indice){
@@ -194,6 +205,13 @@ public class DadosDeVacas extends javax.swing.JFrame {
         int vacaID = listaVacasTemp.get(indice).getID();
         return vacaID;
 
+    }
+
+    public void atualizaListaVacas(int rebanhoID) {
+        listaVacas.removeAllItems();
+        for(Vaca vaca : vacasDAO.getTodasVacas(rebanhoID)) {
+            listaVacas.addItem("" + vaca.getID() + " - " + vaca.getNome());
+        }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
