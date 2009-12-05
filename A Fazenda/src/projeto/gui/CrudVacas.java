@@ -20,6 +20,7 @@ public class CrudVacas extends javax.swing.JFrame {
     GerenciarRebanhos gerenc;
     AdicionarVaca addVaca = new AdicionarVaca(this, false);
     AlterarVaca alterarVacas = new AlterarVaca(this, false);
+    DadosDeVacas dadosVacas = new DadosDeVacas(this, false);
     DeletarVaca delVaca = new DeletarVaca(this, false);
     int rebanhoID;
     /** Creates new form CrudVacas */
@@ -69,6 +70,11 @@ public class CrudVacas extends javax.swing.JFrame {
 
         jButton2.setText("Dados de Vacas");
         jButton2.setName("jButton2"); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Alterar Vacas");
         jButton3.setName("jButton3"); // NOI18N
@@ -186,6 +192,13 @@ public class CrudVacas extends javax.swing.JFrame {
         alterarVacas.atualizaListaVacas(rebanhoID);
         alterarVacas.atualizarListaRebanhos();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        setVisible(false);
+        dadosVacas.setVisible(true);
+        dadosVacas.atualizaListaVacas(rebanhoID);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public void setRebanhoID(int rebanhoID) {
         this.rebanhoID = rebanhoID;
