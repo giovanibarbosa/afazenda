@@ -42,13 +42,31 @@ public class RebanhoDAO {
 			System.out.println("Conexao não pôde ser fechada");
 		}
 	}
+	
+	public String getNomeRebanho(Integer rebanhoID) {
+		conecta();
+
+		String retorno = "";
+		String sql = "SELECT nome from Vacas WHERE rebanhoID = " + rebanhoID;
+		try {
+			ResultSet rs = stmt.executeQuery(sql);
+			rs.next();
+
+			retorno = rs.getString(1);
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			close();
+			}
+		return retorno;
+	}
 
 	public void insereRebanho(Rebanho rebanho) {
 		conecta();
 		String sql = "insert into Rebanhos (nome) values (?)";
 		try {
 			stmt = conexao.prepareStatement(sql);
-//			stmt.setInt(1, rebanho.getID());
 			stmt.setString(1, rebanho.getNome());
 			stmt.execute();
 		} catch (SQLException e) {
