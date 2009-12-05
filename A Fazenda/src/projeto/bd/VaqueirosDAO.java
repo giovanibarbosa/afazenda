@@ -46,6 +46,86 @@ public class VaqueirosDAO {
 		}
 	}
 
+    public String getNomeVaqueiro(String vaqueiroCPF) {
+        conecta();
+
+        String retorno="";
+        String sql = "SELECT nome from Vaqueiros WHERE vaqueiroCPF = " + vaqueiroCPF;
+        try {
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            retorno= rs.getString(1);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            close();
+        }
+        return retorno;
+    }
+
+
+public String getEnderecoVaqueiro(Integer vaqueiroCPF) {
+
+conecta();
+
+String retorno="";
+
+String sql = "SELECT endereco from Vaqueiro WHERE vaqueiroCPF = " + vaqueiroCPF;
+
+try {
+
+ResultSet rs = stmt.executeQuery(sql);
+
+rs.next();
+
+retorno= rs.getString(1);
+
+} catch (SQLException e) {
+
+System.out.println(e.getMessage());
+
+} finally {
+
+close();
+
+}
+
+return retorno;
+
+}
+
+
+
+public int getVaqueiroIdade(Integer vaqueiroCPF) {
+
+conecta();
+
+int retorno=0;
+
+String sql = "SELECT idade from Vaqueiro WHERE vaqueiroCPF = " + vaqueiroCPF;
+
+try {
+
+ResultSet rs = stmt.executeQuery(sql);
+
+rs.next();
+
+retorno= rs.getInt(1);
+
+} catch (SQLException e) {
+
+System.out.println(e.getMessage());
+
+} finally {
+
+close();
+
+}
+
+return retorno;
+
+}
+
 	public void insereVaqueiro(String vaqueiroCPF, String nome,
 			String endereco, Integer idade) {
 		conecta();
