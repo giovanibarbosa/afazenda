@@ -101,6 +101,26 @@ public class VacasDAO {
 
 		return retorno;
 	}
+	
+	public String getVaqueiroCPF(Integer vacaID) {
+		conecta();
+
+		String retorno = "";
+		String sql = "SELECT vaqueiroCPF from Vacas WHERE vacaID = " + vacaID;
+		try {
+			ResultSet rs = stmt.executeQuery(sql);
+			rs.next();
+
+			retorno = rs.getString(1);
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			close();
+
+		}
+		return retorno;
+	}
 
     public int getIdadeVaca(Integer vacaID) {
         conecta();
