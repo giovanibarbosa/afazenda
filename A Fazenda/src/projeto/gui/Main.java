@@ -64,10 +64,7 @@ public class Main extends javax.swing.JFrame {
 
         titulo.setFont(new java.awt.Font("Tahoma", 1, 14));
         titulo.setText("A Fazenda");
-        
-//        figura.setIcon(new javax.swing.ImageIcon("vacaPlanoFundo.jpg")); // NOI18N
-//        figura.setText("figura");
-//        figura.setBounds(400, 250, 0, 0);
+
         
         cadastrarRebanho.setText("CADASTRAR REBANHO");
         cadastrarRebanho.addActionListener(new java.awt.event.ActionListener() {
