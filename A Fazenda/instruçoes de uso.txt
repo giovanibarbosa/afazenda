@@ -1,14 +1,14 @@
 Primeiro deve conter o MySql instalado em sua maquina,
-logo em seguida abrir o terminal, no menu iniciar>executar, no MySql
-coloque as configuraçoes da senha root e do usuario root
+logo em seguida abrir o terminal, no menu iniciar>executar,digite cmd 
+e aperte em executar, assim o terminal se abrirá em sua tela.
 
-Digite cmd e aperte em executar, assim o terminal se abrirá em sua tela.
-
-Depois de aberto devera ir no diretorio onde esta localizado a pasta
+Depois de aberto, pelo terminal, devera ir no diretorio onde esta localizado a pasta
 do projeto.
 
-Agora executar o script, onde estao contidas as informaçoes das tabelas, 
-digitando mysql -u root -p < scriptDeDabelas.sql e a senha: root.
+Configure o MySql coloque as configuraçoes da senha root e do usuario root.
+
+Agora executar o script tambem no terminal, onde estao contidas as 
+informaçoes para a criacao das tabelas, digitando mysql -u root -p < scriptDeDabelas.sql e a senha: root.
 
 Antes de executar o projeto, deverá ir no build path em adicionar external jar
 e adicionar o drive conector que vai estar na pasta do projeto.
